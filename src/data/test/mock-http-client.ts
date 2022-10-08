@@ -1,14 +1,13 @@
-import { HttpPostClient, HttpPostParams } from '@/data/protocols/http/http-post-client'
-import { HttpResponse, HttpStatusCode } from '@/data/protocols/http/http-response'
+import * as http from '@/data/protocols/http'
 
-export class HttpPostClientSpy<T, R> implements HttpPostClient<T, R> {
+export class HttpPostClientSpy<T, R> implements http.HttpPostClient<T, R> {
   url?: string
   body?: T
-  response: HttpResponse<R> = {
-    statusCode: HttpStatusCode.ok
+  response: http.HttpResponse<R> = {
+    statusCode: http.HttpStatusCode.ok
   }
 
-  async post (params: HttpPostParams<T>): Promise<HttpResponse<R>> {
+  async post (params: http.HttpPostParams<T>): Promise<http.HttpResponse<R>> {
     this.url = params.url
     this.body = params.body
     // eslint-disable-next-line @typescript-eslint/return-await

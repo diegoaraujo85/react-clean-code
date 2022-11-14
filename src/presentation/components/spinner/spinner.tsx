@@ -7,6 +7,7 @@ const Spinner: React.FC<Props> = (props: Props) => {
   return (
     <div
       {...props}
+      // eslint-disable-next-line react/prop-types
       className={[Styles.spinner, props.className].join(' ')}
     >
       <div />

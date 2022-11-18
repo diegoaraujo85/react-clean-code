@@ -9,7 +9,7 @@
     "lint:fix": "npm run lint -- --fix",
     "test": "cross-env NODE_ICU_DATA=node_modules/full-icu jest --passWithNoTests --no-cache --runInBand",
     "test:watch": "npm test -- --watch",
-    "test:staged": "npm test -- --findRelatedTests",
+    "test:staged": "npm test -- -o",
     "test:ci": "npm test -- --coverage",
     "test:coveralls": "npm run test:ci && coveralls < coverage/lcov.info",
     "prepare": "husky install"

@@ -2,12 +2,14 @@ import React, { useContext } from 'react'
 import Styles from './input-styles.scss'
 import Context from '@/presentation/contexts/form/form-context'
 
-type Props = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
+type Props = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> &{
+  name: string
+}
 
 const Input: React.FC<Props> = (props: Props) => {
-  const { errorState } = useContext(Context)
+  const { state, setState } = useContext(Context)
 
-  const error = errorState[props.name] // eslint-disable-line react/prop-types
+  const error = state[`${props.name}Error`]
 
   const getStatus = (): string => {
     return '🔴'
@@ -17,14 +19,21 @@ const Input: React.FC<Props> = (props: Props) => {
     return error
   }
 
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    setState({
+      ...state,
+      [event.target.name]: event.target.value
+    })
+  }
+
   return (
     <div className={Styles.inputWrap}>
       <input
         {...props}
         autoComplete="off"
+        onChange={handleChange}
       />
       <span
-        // eslint-disable-next-line react/prop-types
         data-testid={`${props.name}-status`}
         title={getTitle()}
         className={Styles.status}

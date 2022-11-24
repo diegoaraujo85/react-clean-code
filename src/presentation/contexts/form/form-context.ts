@@ -3,6 +3,7 @@ import { createContext } from 'react'
 type LoginStateProps = {
   isLoading: boolean
   email: string
+  password: string
   emailError: string
   passwordError: string
   mainError: string
